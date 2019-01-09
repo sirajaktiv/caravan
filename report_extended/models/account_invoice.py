@@ -14,6 +14,16 @@ class AccountInvoiceLine(models.Model):
         'Expiry date', related='lot_number.life_date')
 
 
+class AccountInvoice(models.Model):
+    _inherit = "account.invoice"
+
+    @api.multi
+    def get_tax_recs(self, rec):
+        tax_list = rec.invoice_line_ids.mapped(
+            'invoice_line_tax_ids').mapped('name')
+        return tax_list
+
+
 class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
 

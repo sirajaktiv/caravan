@@ -50,6 +50,29 @@
         <div class="article o_report_layout_standard" style="padding-top: 100px;">
             <t t-raw="0" />
         </div>
+
+        <div class="footer">
+            <div class="row" style="direction: rtl;">
+                <div class="col-xs-12">
+                    <table class="table table-bordered" width="100%">
+                        <tr>
+                            <th class="text-center"><strong>سجل تجاري</strong></th>
+                            <th class="text-center"><strong>عضوية الغرفة</strong></th>
+                            <th class="text-center"><strong>VAT-No </strong></th>
+                            <th class="text-center"><strong>C.M.M No.</strong></th>
+                            <th class="text-center"><strong>CR</strong></th>
+                        </tr>
+                        <tr>
+                            <td><span t-field="o.company_id.company_registry"/></td>
+                            <td><span t-field="o.company_id.report_footer"/></td>
+                            <td><span t-field="o.company_id.vat"/></td>
+                            <td><span t-field="o.company_id.report_footer"/></td>
+                            <td><span t-field="o.company_id.company_registry"/></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
     </template>
 
     <template id="report_invoice_document1" inherit_id='account.report_invoice_document'>
@@ -58,8 +81,8 @@
                 <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})" />
                 <div class="page">
                     <div style='direction: rtl;'>
-                        <div ><strong>المحترمين: </strong><span t-field="o.partner_id.name"/></div><br/>
-                        <div><strong>:المحترم </strong><span t-field="o.partner_id.function"/> - <span t-field="o.partner_id.parent_id.name"/></div><br/>
+                        <div ><strong>المحترمين: </strong><span t-field="o.company_id.city"/>, <span t-field="o.company_id.name"/></div><br/>
+                        <div><strong>المحترم:</strong><span t-field="o.partner_id.function"/>-<span t-field="o.partner_id"/>-<span t-field="o.partner_id.parent_id.name"/></div><br/>
                         <center><h2><span t-field="o.number"/></h2></center>
                         <div class="col-xs-4" style="margin-top: 15px;">
                             <strong>الموافق: </strong>
@@ -70,6 +93,7 @@
                             <span t-field="o.hijri_date"/>
                         </div>
                     </div>
+                    <!-- Invoice Line Table -->
                     <table class="table table-condensed" name="invoice_line_table" style='direction: rtl;'>
                         <thead>
                             <tr>
@@ -111,12 +135,18 @@
                         </tbody>
                     </table>
 
+                    <!-- Tax and Total Amount -->
                     <div class="clearfix">
                         <div id="total" class="row">
-                            <div class="col-xs-12 pull-right">
+                            <div class="col-xs-12">
                                 <table class="table table-condensed" style="min-width: 250px;max-width: 400px;direction: rtl;">
                                     <tr class="border-black" style="border: 1px solid gray;">
-                                        <td style="border: 1px solid gray;width: 80%;" colspan="2"><strong>ضريبة المضافة</strong></td>
+                                        <td style="border: 1px solid gray;width: 80%;" colspan="2">
+                                            <strong>ضريبة المضافة</strong>
+                                            <t t-foreach="o.get_tax_recs(o)" t-as="name">
+                                                <span t-esc="name"/><span>  </span>
+                                            </t>
+                                        </td>
 
                                         <td class="text-right" style="border: 1px solid gray;">
                                             <span t-field="o.amount_tax" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
@@ -133,12 +163,35 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Invoice Arabic Notes -->
                     <div style='direction: rtl;'>
-                        <div><strong>مناقصة:</strong><span t-field="o.note_2"/><br/></div>
-                        <div style="padding: 10px;"><strong>تعميد رقم : </strong><span t-field="o.note_3"/><br/></div>
-                        <div><strong>عقد رقم : </strong><span t-field="o.note_4"/><br/></div>
+                        <div class="row" style="margin-bottom:10px;">
+                            <div class="col-xs-10">
+                                <span t-field="o.note_2"/>
+                            </div>
+                            <div class="col-xs-2">
+                                <strong>مناقصة:</strong>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom:10px;">
+                            <div class="col-xs-10">
+                                <span t-field="o.note_3"/>
+                            </div>
+                            <div class="col-xs-2">
+                                <strong>تعميد رقم : </strong>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom:10px;">
+                            <div class="col-xs-10">
+                                <span t-field="o.note_4"/>
+                            </div>
+                            <div class="col-xs-2">
+                                <strong>عقد رقم : </strong>
+                            </div>
+                        </div>
                     </div>
-                    <div style='direction: rtl;margin-top: 15px;'>
+                    <!-- <div style='direction: rtl;margin-top: 15px;'>
                         <div class="col-xs-4">
                             <strong>VAT-No </strong>
                             <span t-field="o.company_id.vat"/>
@@ -152,7 +205,7 @@
                             <strong>سجل تجاري</strong>
                             <span t-field="o.company_id.company_registry"/>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </t>
         </t>
