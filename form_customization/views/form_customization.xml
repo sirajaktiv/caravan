@@ -1,50 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record id="view_production_lot_form_inherite_view" model="ir.ui.view">
+        <field name="name">stock.production.lot.form</field>
+        <field name="model">stock.production.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_form" />
+        <field name="arch" type="xml">
+           <xpath expr="//group[@name='main_group']/group"
+                position="after">
+                <group>
+                    <field name='production_date'/>
+                </group>
+            </xpath>
+        </field>
+    </record>
 
-        <record id="view_production_lot_form_inherite_view" model="ir.ui.view">
-            <field name="name">stock.production.lot.form</field>
-            <field name="model">stock.production.lot</field>
-            <field name="inherit_id" ref="stock.view_production_lot_form" />
-            <field name="arch" type="xml">
-               <xpath expr="//group[@name='main_group']/group"
-                    position="after">
-                    <group>
-                        <field name='production_date'/>
-                    </group>
-                </xpath>
+    <record id="view_order_form_inherite_view" model="ir.ui.view">
+        <field name="name">sale.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+           <xpath expr="//field[@name='order_line']/tree/field[@name='name']" position="after">
+                <field name='lot_number' domain="[('product_id','=',product_id)]" options="{'no_open': True, 'no_create': True}"/>
+                <field name='production_date' readonly="1"/>
+                <field name='expiry_date' readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="invoice_form_inherite_view" model="ir.ui.view">
+        <field name="name">account.invoice.form</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_term_id']"
+                position="after">
+                    <field name='hijri_date'/>
+            </xpath>
+            <field name="comment" position="before">
+                <field name="note_2" placeholder="مناقصة"/>
+                <field name="note_3" placeholder="تعميد رقم"/>
+                <field name="note_4" placeholder="عقد رقم"/>
             </field>
-        </record>
-
-        <record id="view_order_form_inherite_view" model="ir.ui.view">
-            <field name="name">sale.order.form</field>
-            <field name="model">sale.order</field>
-            <field name="inherit_id" ref="sale.view_order_form" />
-            <field name="arch" type="xml">
-               <xpath expr="//field[@name='order_line']/tree/field[@name='name']"
-                    position="after">
-                        <field name='lot_number' domain="[('product_id','=',product_id)]" options="{'no_open': True, 'no_create': True}"/>
-                        <field name='production_date' readonly="1"/>
-                        <field name='expiry_date' readonly="1"/>
-                </xpath>
+            <field name="invoice_line_ids" position="after">
+                <field name="note_1" class="oe_inline oe_left" placeholder="الاجمالي"/>
             </field>
-        </record>
-
-        <record id="invoice_form_inherite_view" model="ir.ui.view">
-            <field name="name">account.invoice.form</field>
-            <field name="model">account.invoice</field>
-            <field name="inherit_id" ref="account.invoice_form" />
-            <field name="arch" type="xml">
-               <xpath expr="//field[@name='payment_term_id']"
-                    position="after">
-                        <field name='hijri_date'/>
-                </xpath>
-                 <field name="comment" position="before">
-                    <field name="note_1" placeholder="Arabic Note 1..."/>
-                    <field name="note_2" placeholder="Arabic Note 2..."/>
-                    <field name="note_3" placeholder="Arabic Note 3..."/>
-                    <field name="note_4" placeholder="Arabic Note 4..."/>
-                 </field>
-            </field>
-        </record>
-
+        </field>
+    </record>
 </odoo>

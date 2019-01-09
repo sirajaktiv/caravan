@@ -51,5 +51,7 @@ class ResCompany(models.Model):
     @api.multi
     def _get_company_details_arabic(self, data):
         translator = Translator()
-        name = translator.translate(data, dest='arabic').text
-        return name
+        if data:
+            name = translator.translate(data, dest='arabic').text
+            return name
+        return data
