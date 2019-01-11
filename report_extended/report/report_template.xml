@@ -63,8 +63,10 @@
                             <th class="text-center"><strong>CR</strong></th>
                         </tr>
                         <tr>
-                            <td><span t-field="o.company_id.company_registry"/></td>
-                            <td><span t-field="o.company_id.report_footer"/></td>
+                            <t t-set="cr" t-value="o.company_id.company_registry"/>
+                            <t t-set="cmm" t-value="o.company_id.report_footer"/>
+                            <td><span t-esc="o.get_arabic_numbers(cr)"/></td>
+                            <td><span t-esc="o.get_arabic_numbers(cmm)"/></td>
                             <td><span t-field="o.company_id.vat"/></td>
                             <td><span t-field="o.company_id.report_footer"/></td>
                             <td><span t-field="o.company_id.company_registry"/></td>
@@ -191,21 +193,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div style='direction: rtl;margin-top: 15px;'>
-                        <div class="col-xs-4">
-                            <strong>VAT-No </strong>
-                            <span t-field="o.company_id.vat"/>
-                        </div>
-                        <div class="col-xs-4">
-                            <strong>عضوية الغرفة </strong>
-                            <span t-field="o.company_id.report_footer"/>
-                        </div>
-                        
-                        <div class="col-xs-4">
-                            <strong>سجل تجاري</strong>
-                            <span t-field="o.company_id.company_registry"/>
-                        </div>
-                    </div> -->
                 </div>
             </t>
         </t>

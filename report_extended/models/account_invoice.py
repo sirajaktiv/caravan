@@ -23,6 +23,18 @@ class AccountInvoice(models.Model):
             'invoice_line_tax_ids').mapped('name')
         return tax_list
 
+    @api.multi
+    def get_arabic_numbers(self, number):
+        if number:
+            number_list = [int(x) for x in str(number)]
+            arabic_num_dict = {
+                0: '٠', 1: '١', 2: '٢', 3: '٣', 4: '٤', 5: '٥',
+                6: '٦', 7: '٧', 8: '٨', 9: '٩'}
+            arabic_num_list = [arabic_num_dict[x] for x in number_list]
+            arabic_number = ''.join(arabic_num_list)
+            return arabic_number
+        return False
+
 
 class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"

@@ -2,7 +2,7 @@
 # -*- encoding: utf-8 -*-
 {
     'name': 'Report Extended',
-    'version': '11.0.1.1.1',
+    'version': '11.0.1.2.1',
     'category': 'Report',
     'summary': 'Report Extended',
     'description': "Invoice Report Extended",
