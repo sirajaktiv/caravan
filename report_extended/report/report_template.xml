@@ -59,7 +59,7 @@
                             <t t-set="cr" t-value="o.company_id.company_registry"/>
                             <t t-set="cmm" t-value="o.company_id.report_footer"/>
                             <td>سجل تجاري <span t-esc="o.get_arabic_numbers(cr[::-1])"/> عضوية الغرفة -  <span t-esc="o.get_arabic_numbers(cmm[::-1])"/></td>
-                            <td class="text-left">C.R. <span t-field="o.company_id.company_registry"/> - C.C.M. No. <span t-field="o.company_id.report_footer"/></td>
+                            <td class="text-left">C.R. <span t-field="o.company_id.company_registry"/> - C.C.M. No. <span t-field="o.company_id.report_footer"/> - VAT. No. <span t-field="o.company_id.vat"/></td>
 
                         </tr>
                     </table>
