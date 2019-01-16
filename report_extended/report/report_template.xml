@@ -54,23 +54,13 @@
         <div class="footer">
             <div class="row" style="direction: rtl;">
                 <div class="col-xs-12">
-                    <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;"/>
                     <table width="100%">
-                        <tr>
-                            <th class="text-center"><strong>سجل تجاري</strong></th>
-                            <th class="text-center"><strong>عضوية الغرفة</strong></th>
-                            <th class="text-center"><strong>VAT-No </strong></th>
-                            <th class="text-center"><strong>C.M.M No.</strong></th>
-                            <th class="text-center"><strong>CR</strong></th>
-                        </tr>
                         <tr>
                             <t t-set="cr" t-value="o.company_id.company_registry"/>
                             <t t-set="cmm" t-value="o.company_id.report_footer"/>
-                            <td class="text-center"><span t-esc="o.get_arabic_numbers(cr[::-1])"/></td>
-                            <td class="text-center"><span t-esc="o.get_arabic_numbers(cmm[::-1])"/></td>
-                            <td class="text-center"><span t-field="o.company_id.vat"/></td>
-                            <td class="text-center"><span t-field="o.company_id.report_footer"/></td>
-                            <td class="text-center"><span t-field="o.company_id.company_registry"/></td>
+                            <td>سجل تجاري <span t-esc="o.get_arabic_numbers(cr[::-1])"/> عضوية الغرفة -  <span t-esc="o.get_arabic_numbers(cmm[::-1])"/></td>
+                            <td class="text-left">C.R. <span t-field="o.company_id.company_registry"/> - C.C.M. No. <span t-field="o.company_id.report_footer"/></td>
+
                         </tr>
                     </table>
                 </div>
