@@ -1,7 +1,5 @@
-
 from odoo import models, fields, api
 from odoo.tools import float_is_zero
-from googletrans import Translator
 
 
 class AccountInvoiceLine(models.Model):
@@ -58,22 +56,3 @@ class SaleOrderLine(models.Model):
                              'sale_line_ids': [(6, 0, [line.id])]})
                 invoice_lines |= self.env['account.invoice.line'].create(vals)
         return invoice_lines
-
-
-class ResCompany(models.Model):
-    _inherit = "res.company"
-
-    @api.multi
-    def _get_company_data(self, data):
-        vals = []
-        for each in range(int(data.count(',')) + 1):
-            vals.append(data.split(',')[each])
-        return vals
-
-    @api.multi
-    def _get_company_details_arabic(self, data):
-        translator = Translator()
-        if data:
-            name = translator.translate(data, dest='arabic').text
-            return name
-        return data

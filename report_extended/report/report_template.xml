@@ -11,8 +11,10 @@
         <t t-if="not o or not 'company_id' in o">
             <t t-set="company" t-value="res_company"/>
         </t>
+        <!-- Header -->
         <div class="header">
             <div class="row">
+                <!-- Company information in English -->
                 <div class="col-xs-4" name="company_address">
                     <span t-field="res_company.partner_id.name"/><br/>
                      <span t-field="res_company.partner_id.street"/><br/>
@@ -26,31 +28,37 @@
                      </t>
                      <span t-field="res_company.partner_id.website"/><br/>
                 </div>
+                <!-- Company Logo -->
                 <div class="col-xs-4">
                     <center>
                     <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)" style="max-height: 100px;"/></center>
                 </div>
+                <!-- Company information in Arabic -->
                 <div class="col-xs-4" name="company_address">
-                    <t t-esc='res_company._get_company_details_arabic(res_company.partner_id.name)'/><br/>
-                   <t t-esc='res_company._get_company_details_arabic(res_company.partner_id.street)'/><br/>
-                    <t t-esc='res_company._get_company_details_arabic(res_company.partner_id.street2)'/><br/>
-                    <t t-esc='res_company._get_company_details_arabic(res_company.partner_id.city)'/>-<t t-esc='res_company._get_company_details_arabic(res_company.partner_id.zip)'/>-<t t-esc='res_company._get_company_details_arabic(res_company.partner_id.country_id.name)'/><br/>
+                    <t t-esc='res_company.arabic_partner_name'/><br/>
+                   <t t-esc='res_company.arabic_street'/><br/>
+                    <t t-esc='res_company.arabic_street2'/><br/>
+                    <t t-esc='res_company.arabic_city'/>-<t t-esc='res_company.arabic_zip'/>-<t t-esc='res_company.arabic_country'/><br/>
 
-                    <t t-foreach="res_company._get_company_data(res_company.partner_id.phone)" t-as="phone">
-                        <span><t t-esc='res_company._get_company_details_arabic(phone)'/></span><br/>
+                    <t t-foreach="res_company._get_company_data(res_company.arabic_phone)" t-as="phone">
+                        <span><t t-esc='phone'/></span><br/>
                      </t>
-                     <t t-foreach="res_company._get_company_data(res_company.partner_id.email)" t-as="email">
-                        <span><t t-esc='res_company._get_company_details_arabic(email)'/> </span><br/>
+                     <t t-foreach="res_company._get_company_data(res_company.arabic_email)" t-as="email">
+                        <span><t t-esc='email'/> </span><br/>
                      </t>
-                     <t t-esc='res_company._get_company_details_arabic(res_company.partner_id.website)'/><br/>
+                     <t t-esc='res_company.arabic_website'/><br/>
                 </div>
             </div>
         </div>
+        <!-- End Header -->
 
+        <!-- Body -->
         <div class="article o_report_layout_standard" style="padding-top: 100px;">
             <t t-raw="0" />
         </div>
+        <!-- End Body -->
 
+        <!-- Footer -->
         <div class="footer">
             <div class="row" style="direction: rtl;">
                 <div class="col-xs-12">
@@ -66,6 +74,7 @@
                 </div>
             </div>
         </div>
+        <!-- End Footer -->
     </template>
 
     <template id="report_invoice_document1" inherit_id='account.report_invoice_document'>

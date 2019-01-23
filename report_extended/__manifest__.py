@@ -12,7 +12,8 @@
     'depends': ['account', 'form_customization'],
     'data': [
         'report/report_template.xml',
-        'views/account_invoice.xml'
+        'views/account_invoice.xml',
+        'views/res_company_view.xml'
     ],
     'qweb': [],
     'installable': True,
