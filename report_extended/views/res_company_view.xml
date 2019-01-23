@@ -10,7 +10,7 @@
                 <page name="arabic_details" string="Arabic Info.">
                     <group>
                         <group>
-                            <field name="arabic_partner_name" required="0" groups="base.group_no_one"/>
+                            <field name="arabic_company_name" required="0"/>
                                 <label for="street" string="Address"/>
                                 <div class="o_address_format">
                                     <field name="arabic_street" placeholder="Street..." class="o_address_street"/>

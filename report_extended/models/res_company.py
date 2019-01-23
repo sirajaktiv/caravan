@@ -4,7 +4,7 @@ from odoo import api, models, fields
 class ResCompany(models.Model):
     _inherit = "res.company"
 
-    arabic_partner_name = fields.Char(string="Partner Name")
+    arabic_company_name = fields.Char(string="Arabic Company Name")
     arabic_street = fields.Char(string="Address")
     arabic_street2 = fields.Char()
     arabic_city = fields.Char()

@@ -35,7 +35,7 @@
                 </div>
                 <!-- Company information in Arabic -->
                 <div class="col-xs-4" name="company_address">
-                    <t t-esc='res_company.arabic_partner_name'/><br/>
+                    <t t-esc='res_company.arabic_company_name'/><br/>
                    <t t-esc='res_company.arabic_street'/><br/>
                     <t t-esc='res_company.arabic_street2'/><br/>
                     <t t-esc='res_company.arabic_city'/>-<t t-esc='res_company.arabic_zip'/>-<t t-esc='res_company.arabic_country'/><br/>
